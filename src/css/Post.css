@@ -1,0 +1,73 @@
+/* Post page layout */
+.post-page {
+    margin-top: 20px;
+}
+
+/* Post card */
+.post {
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar styles */
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+/* Header */
+.post-header {
+    background-color: #f7f7f7;
+    padding: 15px;
+}
+
+/* Post image and video */
+.post-image-adjust {
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Card title and description */
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* Post footer */
+.post-actions {
+    background-color: #f7f7f7;
+    padding: 10px;
+}
+
+/* Comments section */
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.comment img.avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.comment-section input {
+    width: 100%;
+    border-radius: 20px;
+    padding: 8px;
+}
+
+/* Create Post Styles */
+.create-post {
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.create-post .card-header {
+    background-color: #f7f7f7;
+    padding: 15px;
+}
