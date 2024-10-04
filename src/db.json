@@ -1,0 +1,43 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "User1",
+            "password": "pass1",
+            "fullname": "John Doe",
+            "dateofbirth": "1990-01-01",
+            "city": "New York",
+            "age": 34,
+            "gender": "Male",
+            "hobby": "Traveling",
+            "description": "A travel enthusiast.",
+            "image": "/path-to-user1-avatar.jpg"
+        },
+        {
+            "id": 2,
+            "username": "User2",
+            "password": "pass2",
+            "fullname": "Jane Smith",
+            "dateofbirth": "1992-05-15",
+            "city": "Los Angeles",
+            "age": 32,
+            "gender": "Female",
+            "hobby": "Photography",
+            "description": "Loves to capture moments.",
+            "image": "/path-to-user2-avatar.jpg"
+        },
+        {
+            "id": 3,
+            "username": "Admin",
+            "password": "admin",
+            "fullname": "Admin User",
+            "dateofbirth": "1985-11-11",
+            "city": "San Francisco",
+            "age": 39,
+            "gender": "Male",
+            "hobby": "Managing",
+            "description": "Oversees all operations.",
+            "image": "/path-to-admin-avatar.jpg"
+        }
+    ]
+}

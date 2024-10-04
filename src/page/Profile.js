@@ -1,57 +1,138 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaMale, FaFemale } from 'react-icons/fa';
 import Menu from '../components/Menu';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/Profile.css';
 
-
-const localUsers = [
-    { id: 1, name: 'John Doe', city: 'Paris', age: 30, gender: 'Male', description: 'I love traveling and meeting new people.', availability: 'September', img: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' },
-    { id: 2, name: 'Jane Smith', city: 'New York', age: 25, gender: 'Female', description: 'New York native looking to explore new cultures.', availability: 'October', img: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' },
-    { id: 3, name: 'Michael Johnson', city: 'London', age: 28, gender: 'Male', description: 'I can show you the best places in London.', availability: 'November', img: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' },
-    { id: 4, name: 'Emily Davis', city: 'Berlin', age: 32, gender: 'Female', description: 'Berlin is full of history. Let’s explore it together.', availability: 'December', img: 'https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zMjgtMzY2LXRvbmctMDhfMS5qcGc.jpg' },
-    { id: 5, name: 'David Lee', city: 'Tokyo', age: 29, gender: 'Male', description: 'Tokyo is my home. I can take you to hidden gems.', availability: 'September', img: 'https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zMjgtMzY2LXRvbmctMDhfMS5qcGc.jpg' },
-    { id: 6, name: 'Sophia Wilson', city: 'Sydney', age: 26, gender: 'Female', description: 'I love surfing and would love to show you around Sydney.', availability: 'October', img: 'https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zMjgtMzY2LXRvbmctMDhfMS5qcGc.jpg' },
-    { id: 7, name: 'Chris Brown', city: 'San Francisco', age: 31, gender: 'Male', description: 'San Francisco has the best spots. Let’s explore together.', availability: 'November', img: 'https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zMjgtMzY2LXRvbmctMDhfMS5qcGc.jpg' },
-    { id: 8, name: 'Olivia Taylor', city: 'Toronto', age: 27, gender: 'Female', description: 'I can show you around Toronto’s downtown and hidden gems.', availability: 'December', img: 'https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20597.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1727308800&semt=ais_hybrid' },
-    { id: 9, name: 'Alex Martinez', city: 'Barcelona', age: 33, gender: 'Male', description: 'Barcelona has the best food and sights, let’s enjoy it.', availability: 'October', img: 'https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20597.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1727308800&semt=ais_hybrid' },
-    { id: 10, name: 'Laura Clark', city: 'Rome', age: 28, gender: 'Female', description: 'Join me on a tour of Rome’s ancient history and cuisine.', availability: 'November', img: 'https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20597.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1727308800&semt=ais_hybrid' },
-];
-
 function Profile() {
-    const { id } = useParams();
-    const user = localUsers.find(user => user.id === parseInt(id));
+    const { userId } = useParams();
+    const [isLoading, setIsLoading] = useState(true);
+    const [userData, setUserData] = useState(null);
+    const [tripPlans, setTripPlans] = useState([]);
 
-    if (!user) {
-        return <div>Người dùng không tồn tại!</div>;
+    useEffect(() => {
+        const savedTripPlans = localStorage.getItem('tripPlans');
+
+        if (!savedTripPlans) {
+            const tripPlans = [
+                { idUser: 1, Host: 'John Doe', Destination: 'Paris', Time: '2024-12-01', MaxPerson: 4, TripDetails: 'A trip to explore the Eiffel Tower.' },
+                { idUser: 2, Host: 'Jane Smith', Destination: 'Tokyo', Time: '2024-11-15', MaxPerson: 3, TripDetails: 'Enjoy the cherry blossoms and culture.' },
+                { idUser: 3, Host: 'Alice Johnson', Destination: 'New York', Time: '2024-10-25', MaxPerson: 5, TripDetails: 'Visit iconic landmarks like the Statue of Liberty.' },
+                { idUser: 1, Host: 'John Doe', Destination: 'Berlin', Time: '2024-09-30', MaxPerson: 2, TripDetails: 'Explore the rich history of Berlin.' },
+                { idUser: 2, Host: 'Jane Smith', Destination: 'Sydney', Time: '2024-08-20', MaxPerson: 6, TripDetails: 'Enjoy the beautiful beaches and opera house.' },
+                { idUser: 3, Host: 'Alice Johnson', Destination: 'Rome', Time: '2024-07-15', MaxPerson: 4, TripDetails: 'Explore ancient ruins and museums.' },
+                { idUser: 1, Host: 'John Doe', Destination: 'London', Time: '2024-06-05', MaxPerson: 4, TripDetails: 'Visit Buckingham Palace and more.' },
+                { idUser: 2, Host: 'Jane Smith', Destination: 'Los Angeles', Time: '2024-05-10', MaxPerson: 5, TripDetails: 'Explore Hollywood and the city.' },
+                { idUser: 3, Host: 'Alice Johnson', Destination: 'Dubai', Time: '2024-04-22', MaxPerson: 3, TripDetails: 'Experience luxury and desert tours.' },
+                { idUser: 1, Host: 'John Doe', Destination: 'Bangkok', Time: '2024-03-12', MaxPerson: 6, TripDetails: 'Explore the vibrant city and temples.' },
+            ];
+
+            localStorage.setItem('tripPlans', JSON.stringify(tripPlans));
+        }
+    }, []);
+
+    useEffect(() => {
+        const savedUsers = localStorage.getItem('userList');
+        const savedTripPlans = localStorage.getItem('tripPlans');
+
+        if (savedUsers) {
+            const users = JSON.parse(savedUsers);
+            const foundUser = users.find((u) => u.id.toString() === userId);
+
+            if (foundUser) {
+                setUserData(foundUser);
+            } else {
+                console.error('User not found for ID:', userId);
+            }
+        }
+
+        if (savedTripPlans) {
+            const plans = JSON.parse(savedTripPlans);
+            const userTripPlans = plans.filter((plan) => plan.idUser.toString() === userId);
+            setTripPlans(userTripPlans);
+        }
+
+        setIsLoading(false);
+    }, [userId]);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!userData) {
+        return <div>User not found.</div>;
     }
 
     return (
-        <div className="profile-page">
-            <div><Menu /></div>
-
-            <div className="profile-container">
-                <div className="profile-header">
-                    <h2>Thông tin chi tiết</h2>
-                </div>
-
-                <div className="profile-content">
-                    <div className="profile-image">
-                        <img src={user.img} alt={user.name} />
+        <div>
+            <Menu />
+            <section className="section about-section gray-bg" id="about">
+                <div className="container">
+                    <div className="row align-items-center flex-row-reverse">
+                        <div className="col-lg-6">
+                            <div className="about-text go-to">
+                                <h3 className="dark-color">Giới thiệu</h3>
+                                <h6 className="theme-color lead">{userData.fullname} - {userData.gender}</h6>
+                                <p>{userData.description}</p>
+                                <div className="row about-list">
+                                    <div className="col-md-6">
+                                        <div className="media">
+                                            <label>Birthday</label>
+                                            <p>{userData.dateofbirth}</p>
+                                        </div>
+                                        <div className="media">
+                                            <label>Age</label>
+                                            <p>{userData.age} Yr</p>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="media">
+                                            <label>City</label>
+                                            <p>{userData.city}</p>
+                                        </div>
+                                        <div className="media">
+                                            <label>Hobby</label>
+                                            <p>{userData.hobby}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <div className="about-avatar">
+                                <img src={userData.image} title={userData.fullname} alt={userData.fullname} />
+                            </div>
+                        </div>
                     </div>
-                    <div className="profile-details">
-                        <h3>{user.name}</h3>
-                        <p>Thành phố: {user.city}</p>
-                        <p>Tuổi: {user.age}</p>
-                        <p>
-                            Giới tính: {user.gender === 'Male' ? <FaMale /> : <FaFemale />}
-                        </p>
-                        <p>Mô tả: {user.description}</p>
-                        <p>Thời gian rảnh: {user.availability}</p>
-                    </div>
                 </div>
-            </div>
+            </section>
+
+            {/* Danh sách kế hoạch du lịch */}
+            <section className="section trip-plans-section gray-bg">
+                <div className="container">
+                    <h3 className="dark-color">Kế hoạch du lịch sắp tới</h3>
+                    {tripPlans.length > 0 ? (
+                        <div className="row">
+                            {tripPlans.map((plan, index) => (
+                                <div className="col-md-4" key={index}>
+                                    <div className="card mb-4 shadow-sm">
+                                        <div className="card-body">
+                                            <h5 className="card-title">Điểm đến: {plan.Destination}</h5>
+                                            <p className="card-text"><strong>Host:</strong> {plan.Host}</p>
+                                            <p className="card-text"><strong>Thời gian:</strong> {plan.Time}</p>
+                                            <p className="card-text"><strong>Số người tối đa:</strong> {plan.MaxPerson}</p>
+                                            <p className="card-text"><strong>Chi tiết:</strong> {plan.TripDetails}</p>
+                                            <button className="btn btn-primary">Quan tâm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p>Không có kế hoạch du lịch nào sắp tới.</p>
+                    )}
+                </div>
+            </section>
         </div>
     );
 }
