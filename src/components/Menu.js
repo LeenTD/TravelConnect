@@ -42,6 +42,7 @@ function Menu() {
                             <Nav.Link href="/">Trang Chủ</Nav.Link>
                             <Nav.Link href="/posts">Bài Viết</Nav.Link>
                             <Nav.Link href="/search">Bạn Đồng Hành</Nav.Link>
+                            <Nav.Link href="/tripmanagement">Chuyến đi</Nav.Link>
                             <Nav.Link href="/support">Hỗ Trợ</Nav.Link>
                         </Nav>
                         <Nav>

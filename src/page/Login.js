@@ -13,13 +13,13 @@ function Login() {
             id: 1,
             username: 'Admin',
             password: 'admin',
-            fullname: 'John Doe',
+            fullname: 'Admin',
             dateofbirth: '1990-01-01',
-            city: 'New York',
+            city: 'Đà Nẵng',
             age: 34,
-            gender: 'Male',
-            hobby: 'Traveling',
-            description: 'Love to explore new places!',
+            gender: 'Nam',
+            hobby: 'Du lịch',
+            description: 'Thích rong chơi khắp nơi',
             image: 'https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg',
             role: 'Admin'
         },
@@ -27,13 +27,13 @@ function Login() {
             id: 2,
             username: 'User1',
             password: 'pass1',
-            fullname: 'Jane Smith',
+            fullname: 'Nguyen Minh Anh',
             dateofbirth: '1992-05-12',
-            city: 'Los Angeles',
+            city: 'Quảng Nam',
             age: 32,
-            gender: 'Female',
-            hobby: 'Photography',
-            description: 'Capturing the world through lenses.',
+            gender: 'Nữ',
+            hobby: 'Chụp ảnh',
+            description: 'Du lịch và lưu lại những khoảnh khắc đáng nhớ',
             image: 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1727913600&semt=ais_hybrid',
             role: 'User'
         },
@@ -41,13 +41,13 @@ function Login() {
             id: 3,
             username: 'User2',
             password: 'pass2',
-            fullname: 'Admin User',
+            fullname: 'Tran Khoa',
             dateofbirth: '1985-08-15',
-            city: 'Chicago',
+            city: 'Dak lak',
             age: 39,
-            gender: 'Male',
-            hobby: 'Management',
-            description: 'Managing the platform.',
+            gender: 'Nam',
+            hobby: 'Đi phượt',
+            description: 'Sống cho hết đời thanh xuân',
             image: 'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg',
             role: 'User'
         },
@@ -55,27 +55,27 @@ function Login() {
             id: 4,
             username: 'User3',
             password: 'pass3',
-            fullname: 'Alice Johnson',
+            fullname: 'Pham Gia Long',
             dateofbirth: '1995-03-10',
-            city: 'San Francisco',
+            city: 'Đà Nẵng',
             age: 29,
-            gender: 'Female',
-            hobby: 'Cooking',
-            description: 'Food lover and cooking enthusiast.',
-            image: 'https://example.com/image4.jpg',
+            gender: 'Nam',
+            hobby: 'Bơi lội',
+            description: 'Đẹp trai nhà giàu, Ế',
+            image: 'https://thanhtra.com.vn/data/images/0/2022/07/13/congdinh/img64.jpg?dpi=150&quality=100&w=630&mode=crop&anchor=topcenter&scale=both',
             role: 'User'
         },
         {
             id: 5,
             username: 'User4',
             password: 'pass4',
-            fullname: 'Bob Brown',
+            fullname: 'John Sue',
             dateofbirth: '1988-11-22',
-            city: 'Seattle',
+            city: 'Đà Nẵng',
             age: 35,
-            gender: 'Male',
-            hobby: 'Hiking',
-            description: 'Outdoor enthusiast.',
+            gender: 'Nam',
+            hobby: 'Sing',
+            description: 'Trải nghiệm tất cả',
             image: 'https://danviet.mediacdn.vn/296231569849192448/2022/7/18/z3575814842290f4a344b1db566b37fa96b7a2550a9801-1658133352416631936514.jpg',
             role: 'User'
         },
@@ -83,13 +83,13 @@ function Login() {
             id: 6,
             username: 'User5',
             password: 'pass5',
-            fullname: 'Charlie Green',
+            fullname: 'Tran Dung',
             dateofbirth: '1993-07-15',
-            city: 'Miami',
+            city: 'Quảng Trị',
             age: 31,
-            gender: 'Male',
-            hobby: 'Cycling',
-            description: 'Cyclist and fitness lover.',
+            gender: 'Nữ',
+            hobby: 'Nấu ăn',
+            description: 'Kết bạn bốn phương',
             image: 'https://danviet.mediacdn.vn/296231569849192448/2022/7/18/a33b29c7c6b604e85da7-1658133524535230644268.jpg',
             role: 'User'
         },
@@ -97,13 +97,13 @@ function Login() {
             id: 7,
             username: 'User6',
             password: 'pass6',
-            fullname: 'Diana White',
+            fullname: 'Kim Tien',
             dateofbirth: '1994-02-28',
-            city: 'Miami',
+            city: 'Ha Noi',
             age: 30,
-            gender: 'Female',
-            hobby: 'Reading',
-            description: 'Avid reader and book lover.',
+            gender: 'Nữ',
+            hobby: 'Đọc sách',
+            description: 'Tri thức muôn năm',
             image: 'https://vnn-imgs-f.vgcloud.vn/2019/05/23/09/4-nguoi-dep-lay-danh-hai-noi-tieng-viet-nam-nhung-lai-song-khac-nhau-the-nay-20.jpg',
             role: 'User'
         },
@@ -155,7 +155,6 @@ function Login() {
         const userData = users.find(
             (user) => user.username === email && user.password === password
         );
-
         if (userData) {
             // Save the logged-in user data to localStorage
             localStorage.setItem('user', JSON.stringify(userData));
@@ -163,7 +162,7 @@ function Login() {
             // Navigate based on the user's role
             if (userData.role === 'Admin') {
                 console.log('Redirecting to /search'); // Debugging line
-                navigate('/search');
+                navigate('/admin');
             } else {
                 console.log('Redirecting to home'); // Debugging line
                 navigate('/');
