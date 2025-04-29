@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar, Nav, Container, Button, Dropdown } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'; // Sử dụng useNavigate để điều hướng
 import '../css/AdminListUser.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,21 +14,6 @@ function AdminMenu() {
             setUser(JSON.parse(savedUser));
         }
     }, []);
-
-    const handleLogout = () => {
-        localStorage.removeItem('user'); // Clear user data from localStorage
-        setUser(null); // Reset user state
-        window.location.href = '/login'; // Redirect to login page
-    };
-
-    const handleReset = () => {
-        localStorage.clear(); // Clear all local storage data
-    };
-
-    const goToProfile = () => {
-        // Điều hướng tới trang Profile và truyền ID hoặc thông tin user
-        navigate(`/profile/${user.id}`);
-    };
 
     return (
         <div className="col-lg-3">
