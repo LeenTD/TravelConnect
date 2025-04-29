@@ -1,0 +1,30 @@
+name: CI/CD Deploy to Ubuntu Server
+
+on:
+  push:
+    branches:
+      - test-deploy
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+        with:
+          clean: false  # Giữ lại cache nếu cần
+
+      - name: Install dependencies
+        run: |
+          cd ${{ github.workspace }}
+          npm install
+
+      - name: Build project
+        run: |
+          cd ${{ github.workspace }}
+          npm run build
+
+      - name: Restart app with PM2
+        run: |
+          pm2 restart myapp || pm2 start npm --name "myapp" -- start
