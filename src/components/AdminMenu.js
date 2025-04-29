@@ -1,16 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../css/AdminListUser.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function AdminMenu() {
-
-    // Retrieve user data from localStorage when the component mounts
-    useEffect(() => {
-        const savedUser = localStorage.getItem('user');
-        if (savedUser) {
-            setUser(JSON.parse(savedUser));
-        }
-    }, []);
 
     return (
         <div className="col-lg-3">
