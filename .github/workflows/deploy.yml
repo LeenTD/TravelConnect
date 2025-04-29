@@ -1,30 +1,75 @@
-name: CI/CD Deploy to Ubuntu Server
+name: Deploy React App to Ubuntu Server
 
 on:
   push:
     branches:
       - test-deploy
 
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy'
+        required: true
+        default: 'test-deploy'
+
 jobs:
-  deploy:
-    runs-on: self-hosted
+  build:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          clean: false  # Giữ lại cache nếu cần
+          node-version: 18
+
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Install dependencies
-        run: |
-          cd ${{ github.workspace }}
-          npm install
+        run: pnpm install
 
       - name: Build project
-        run: |
-          cd ${{ github.workspace }}
-          npm run build
+        run: pnpm run build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_CLIENT_VERSION: ${{ github.event.inputs.client_version || '1.0.0' }}
 
-      - name: Restart app with PM2
+      - name: Compress build folder
+        run: zip -r fe.zip dist/
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fe-build
+          path: fe.zip
+          retention-days: 1
+
+  deploy:
+    runs-on: self-hosted
+    needs: build
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: fe-build
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Copy build to server
         run: |
-          pm2 restart myapp || pm2 start npm --name "myapp" -- start
+          scp -o StrictHostKeyChecking=no fe.zip nccsoft@172.16.100.117:~/fe.zip
+
+      - name: Deploy on server
+        run: |
+          ssh -o StrictHostKeyChecking=no nccsoft@172.16.100.117 << 'EOF'
+            rm -rf ~/myapp/dist
+            unzip -o ~/fe.zip -d ~/myapp
+            rm ~/fe.zip
+          EOF
