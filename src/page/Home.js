@@ -102,7 +102,7 @@ function Home({ isLoggedIn }) {
                                 <img src="https://btnmt.1cdn.vn/2023/06/15/1.jpg" className="card-img-top" alt="Paris" />
                                 <div className="card-body">
                                     <h5 className="card-title">Quảng Bình sdvadvadsbsdfbssdvadvadsbsdfbs</h5>
-                                    <p className="card-text">Trải nghiệm không gian thiên nhiên với loạt hangthiên nhiên với loạt hangthiên nhiên với loạt hangthiên nhiên với loạt hang động tự nhiên.</p>
+                                    <p className="card-text">Trải nghiệm không gian thiên nhiên với loạt hangthiên nhiên vn thiên nhiên với loạt hangthiên nhiên với loạt hangthiên nhiên với loạt hangthiên nhiên với loạt hang động tự nhiên.</p>
                                     <Button variant="primary">Tìm Hiểu Thêm</Button>
                                 </div>
                             </div>
