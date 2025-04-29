@@ -4,8 +4,6 @@ import '../css/AdminListUser.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function AdminMenu() {
-    const [user, setUser] = useState(null);
-    const navigate = useNavigate(); // Hook để điều hướng
 
     // Retrieve user data from localStorage when the component mounts
     useEffect(() => {
