@@ -18,6 +18,9 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: debug ping server
+        run: ping nccsoft@172.16.100.117
+
       - name: Copy files to server
         run: |
           ssh -o StrictHostKeyChecking=no nccsoft@172.16.100.117 "mkdir -p ~/myapp"
