@@ -33,9 +33,9 @@ jobs:
 
       - name: Build project
         run: pnpm run build
-        env:
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
-          VITE_CLIENT_VERSION: ${{ github.event.inputs.client_version || '1.0.0' }}
+        # env:
+        #   VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+        #   VITE_CLIENT_VERSION: ${{ github.event.inputs.client_version || '1.0.0' }}
 
       - name: Compress build file
         run: zip -r fe.zip build/
