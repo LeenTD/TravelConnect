@@ -12,14 +12,12 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
-        with:
-          clean: false  # Ngăn việc xóa thư mục tạm gây lỗi
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          
+
       - name: Copy files to server
         run: |
           ssh -o StrictHostKeyChecking=no nccsoft@172.16.100.117 "mkdir -p ~/myapp"
