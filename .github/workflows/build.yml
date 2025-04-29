@@ -19,11 +19,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: debug ping server
-        run: ping -c 4 172.16.100.117
-
-
+          
       - name: Copy files to server
         run: |
           ssh -o StrictHostKeyChecking=no nccsoft@172.16.100.117 "mkdir -p ~/myapp"
