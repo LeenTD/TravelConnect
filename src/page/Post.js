@@ -120,10 +120,10 @@ function Post() {
                             {/* Post Footer - Likes, Shares, Comments */}
                             <div className="card-footer post-actions d-flex justify-content-between align-items-center">
                                 <div>
-                                    <a href="#" className="btn btn-light btn-sm">
+                                    <a href="/home" className="btn btn-light btn-sm">
                                         <i class="bi bi-heart"></i> {post.likes} Likes
                                     </a>
-                                    <a href="#" className="btn btn-light btn-sm ml-2">
+                                    <a href="/home" className="btn btn-light btn-sm ml-2">
                                         <i class="bi bi-share-fill"></i> {post.shares} Shares
                                     </a>
                                 </div>
