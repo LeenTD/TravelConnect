@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Sử dụng useNavigate để điều hướng
+import React, { useEffect } from 'react';
 import '../css/AdminListUser.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
