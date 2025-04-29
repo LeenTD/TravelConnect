@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+        with:
+          clean: false  # Ngăn việc xóa thư mục tạm gây lỗi
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
